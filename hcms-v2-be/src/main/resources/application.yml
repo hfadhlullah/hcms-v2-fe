@@ -1,0 +1,51 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: difan-hcms
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+        format_sql: true
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+  datasource:
+    url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:hcms}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.mariadb.jdbc.Driver
+  flyway:
+    baselineOnMigrate: true
+    enabled: true
+    locations: classpath:db/migration
+    validateOnMigrate: false
+
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:SuperSecretKeyForJWTTokenGenerationAndValidation12345678901234567890}
+      expiration-hours: ${JWT_EXPIRATION_HOURS:8}
+      remember-me-days: 30
+
+logging:
+  level:
+    root: INFO
+    com.example.hcms: DEBUG
+    org.springframework.security: DEBUG
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
