@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hcms-v2-fe
+    ports:
+      - "5173:80"
+    networks:
+      - hcms-network
+    restart: always
+
+networks:
+  hcms-network:
+    external: true
+    name: hcms-global-network

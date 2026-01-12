@@ -11,33 +11,40 @@ Modern React frontend for the HCMS Time & Attendance System.
 | Node.js | 18+ |
 | Bun (recommended) or npm | Latest |
 
-### 1. Install Dependencies
-
+### 1. Run the Application
+   
+#### Option A: Docker (Recommended)
 ```bash
-# Using Bun (recommended)
-bun install
-
-# Using npm
-npm install
+docker compose up -d
 ```
+Frontend runs at: **http://localhost:5173**
 
-### 2. Configure Environment
+#### Option B: Manual Setup
 
-Create `.env` file:
+1. **Install Dependencies**:
+   ```bash
+   # Using Bun (recommended)
+   bun install
+   
+   # Using npm
+   npm install
+   ```
 
-```env
-VITE_API_URL=http://localhost:8080
-```
+2. **Configure Environment**:
+   Create `.env` file:
+   ```env
+   VITE_API_URL=http://localhost:8080
+   ```
 
-### 3. Run Development Server
-
-```bash
-# Using Bun
-bun dev
-
-# Using npm
-npm run dev
-```
+3. **Run Development Server**:
+   ```bash
+   # Using Bun
+   bun dev
+   
+   # Using npm
+   npm run dev
+   ```
+   Frontend runs at: **http://localhost:5173**
 
 Frontend starts at: **http://localhost:5173**
 
@@ -82,12 +89,17 @@ frontend/
 │   │   ├── LoginPage.tsx
 │   │   ├── DashboardPage.tsx
 │   │   ├── ShiftsPage.tsx
-│   │   └── AttendanceAdminPage.tsx
+│   │   ├── AttendanceAdminPage.tsx
+│   │   └── AdminPage.tsx
+│   │
+│   ├── routes/                      # Route configuration
+│   │   └── index.tsx                # Central routing & navigation config
 │   │
 │   ├── api/                         # API clients
 │   │   ├── authApi.ts
 │   │   ├── shiftApi.ts
-│   │   └── attendanceGroupApi.ts
+│   │   ├── attendanceGroupApi.ts
+│   │   └── usersApi.ts
 │   │
 │   ├── hooks/                       # Custom React hooks
 │   │   ├── useAuth.ts
@@ -97,7 +109,7 @@ frontend/
 │   │   ├── authStore.ts
 │   │   ├── shiftStore.ts
 │   │   ├── attendanceGroupStore.ts
-│   │   └── index.ts
+│   │   └── layoutStore.ts
 │   │
 │   ├── types/                       # TypeScript types
 │   │   ├── auth.ts
@@ -105,7 +117,7 @@ frontend/
 │   │   └── index.ts
 │   │
 │   ├── config/                      # Configuration
-│   │   └── menu.ts
+│   │   └── attendance-admin-menu.tsx
 │   │
 │   ├── lib/                         # Utilities
 │   │   └── utils.ts
@@ -338,9 +350,21 @@ import { cn } from '@/lib/utils';
 
 ### Adding New Pages
 
-1. Create page in `src/pages/`
-2. Add route in `src/App.tsx`
-3. Add to navigation menu in `src/config/menu.ts`
+1. Create page component in `src/pages/`
+2. Add route configuration in `src/routes/index.tsx`:
+   ```typescript
+   // Import lazy loaded page
+   const NewPage = lazy(() => import('@/pages/NewPage'));
+
+   // Add to protectedRoutes
+   {
+     path: '/new-page',
+     element: NewPage,
+     useLayout: true,
+     title: 'New Page'
+   }
+   ```
+3. (Optional) Add to sidebar in `src/routes/index.tsx` (sidebarNavItems array)
 
 ### State Management
 
