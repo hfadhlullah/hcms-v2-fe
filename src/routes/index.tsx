@@ -15,10 +15,14 @@ import {
 
 // Lazy load pages for better performance
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
-const ShiftsPage = lazy(() => import('@/pages/ShiftsPage'));
-const AttendanceAdminPage = lazy(() => import('@/pages/AttendanceAdminPage'));
-const AdminPage = lazy(() => import('@/pages/AdminPage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
+
+// Attendance Admin pages
+const GroupSettingsPage = lazy(() => import('@/pages/GroupSettingsPage'));
+const ShiftSettingsPage = lazy(() => import('@/pages/ShiftSettingsPage'));
+
+// HCMS Admin page (will be refactored later)
+const AdminPage = lazy(() => import('@/pages/AdminPage'));
 
 export interface RouteConfig {
   path: string;
@@ -26,6 +30,7 @@ export interface RouteConfig {
   isPublic?: boolean;        // If true, no authentication required
   useLayout?: boolean;       // If true, wraps with DashboardLayout
   title?: string;            // Page title for SEO/navigation
+  children?: RouteConfig[];  // Nested routes (for layouts with Outlet)
 }
 
 export interface NavItem {
@@ -69,22 +74,26 @@ export const protectedRoutes: RouteConfig[] = [
     title: 'Dashboard',
   },
   {
-    path: '/shifts',
-    element: ShiftsPage,
-    useLayout: true,
-    title: 'Shifts',
-  },
-  {
-    path: '/attendance-admin',
-    element: AttendanceAdminPage,
-    useLayout: false,  // AttendanceAdmin has its own layout
-    title: 'Attendance Admin',
-  },
-  {
     path: '/hcms-admin',
     element: AdminPage,
-    useLayout: false,  // AdminPage has its own layout
+    useLayout: false,  // AdminPage has its own layout (inline for now)
     title: 'HCMS Admin',
+  },
+];
+
+/**
+ * Attendance Admin Routes - Uses AttendanceAdminLayout
+ */
+export const attendanceAdminRoutes: RouteConfig[] = [
+  {
+    path: 'groups',
+    element: GroupSettingsPage,
+    title: 'Group Settings',
+  },
+  {
+    path: 'shifts',
+    element: ShiftSettingsPage,
+    title: 'Shift Settings',
   },
 ];
 

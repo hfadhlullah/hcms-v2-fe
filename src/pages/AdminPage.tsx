@@ -4,14 +4,14 @@
  */
 
 import { useState } from 'react';
+import { AdminHeader, AdminSidebar } from '@/components/organisms';
 import {
-    AdminHeader,
-    AdminSidebar,
     OrganizationInfoCard,
     ShortcutsGrid,
     AppsSection,
     MemberDepartmentView,
 } from '@/components/organisms/admin';
+
 
 export function AdminPage() {
     const [activeItem, setActiveItem] = useState('organization-overview');

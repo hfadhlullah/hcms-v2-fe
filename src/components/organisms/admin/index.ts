@@ -2,16 +2,12 @@
  * Admin Components - Barrel export
  */
 
-export * from './AdminHeader';
-export * from './AdminSidebar';
-export * from './OrganizationInfoCard';
-export * from './ShortcutsGrid';
-export * from './AppsSection';
-export * from './MemberDepartmentView';
-export * from './MembersTab';
-export * from './DepartmentTree';
-export * from './MemberTable';
-export * from './AddMemberModal';
-export * from './ResetPasswordModal';
-export * from './MemberDetailsDrawer';
-export * from './PasswordSuccessModal';
+export * from './overview/OrganizationInfoCard';
+export * from './overview/ShortcutsGrid';
+export * from './overview/AppsSection';
+export * from './member/MemberDepartmentView';
+export * from './member/DepartmentTree';
+export * from './member/AddMemberModal';
+export * from './member/ResetPasswordModal';
+export * from './member/MemberDetailsDrawer';
+export * from './member/PasswordSuccessModal';

@@ -6,8 +6,8 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { setupApiInterceptor } from '@/utils';
 import { PrivateRoute } from '@/components/organisms';
-import { DashboardLayout } from '@/components/layout';
-import { publicRoutes, protectedRoutes, defaultRedirect } from '@/routes';
+import { DashboardLayout, AttendanceAdminLayout } from '@/layouts';
+import { publicRoutes, protectedRoutes, attendanceAdminRoutes, defaultRedirect } from '@/routes';
 
 // Initialize API interceptor immediately on app load
 setupApiInterceptor();
@@ -51,6 +51,27 @@ export const App: React.FC = () => {
               }
             />
           ))}
+
+          {/* Attendance Admin Routes - Nested under AttendanceAdminLayout */}
+          <Route
+            path="/attendance-admin"
+            element={
+              <PrivateRoute>
+                <AttendanceAdminLayout />
+              </PrivateRoute>
+            }
+          >
+            {/* Default redirect to groups */}
+            <Route index element={<Navigate to="groups" replace />} />
+            {/* Child routes */}
+            {attendanceAdminRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={<route.element />}
+              />
+            ))}
+          </Route>
 
           {/* Default redirects */}
           <Route path="/" element={<Navigate to={defaultRedirect} replace />} />

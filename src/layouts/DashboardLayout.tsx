@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "@/hooks";
 import { useNavigate } from "react-router-dom";
-import { Sidebar, Navbar } from "@/components/layout";
+import { Sidebar, Header } from "@/components/organisms";
 import { sidebarNavItems } from "@/routes";
 import { cn } from "@/lib/utils";
 
@@ -25,8 +25,8 @@ export const DashboardLayout = ({
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Navbar */}
-        <Navbar
+        {/* Header */}
+        <Header
           userName={user?.email || "User"}
           onLogout={handleLogout}
         />

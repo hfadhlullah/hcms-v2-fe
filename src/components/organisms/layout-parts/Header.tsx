@@ -2,7 +2,7 @@ import React from "react";
 import { Bell, Search, LogOut, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export const Navbar = ({
+export const Header = ({
   userName,
   onLogout,
 }: {
