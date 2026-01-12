@@ -1,0 +1,30 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# 1. Lint the code
+echo "🎨 checking lint..."
+bun lint
+if [ $? -ne 0 ]; then
+    echo "❌ Linting failed! Please check your code."
+    exit 1
+fi
+
+# 2. Type check
+echo "📝 Checking types..."
+bunx tsc --noEmit
+if [ $? -ne 0 ]; then
+    echo "❌ Type check failed! Please fix type errors."
+    exit 1
+fi
+
+# 3. Build check (optional, but good for safety if fast enough)
+echo "🏗️  Verifying build..."
+bun run build
+if [ $? -ne 0 ]; then
+    echo "❌ Build failed! Please fix build errors."
+    exit 1
+fi
+
+echo "✅ All checks passed! Committing..."
