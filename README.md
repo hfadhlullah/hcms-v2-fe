@@ -14,9 +14,30 @@ Modern React frontend for the HCMS Time & Attendance System.
 ### 1. Run the Application
    
 #### Option A: Docker (Recommended)
+
+**Development (with hot reload):**
 ```bash
-docker compose up -d
+docker compose -f docker-compose.dev.yml up -d
 ```
+Changes are reflected instantly without rebuilding.
+
+**Production (optimized build):**
+```bash
+docker compose up -d --build frontend
+```
+Use `--build` flag when you have code changes to rebuild the image.
+
+**Switching between environments:**
+```bash
+# Stop dev, start production
+docker compose -f docker-compose.dev.yml down
+docker compose up -d --build frontend
+
+# Stop production, start dev
+docker compose stop frontend
+docker compose -f docker-compose.dev.yml up -d
+```
+
 Frontend runs at: **http://localhost:5173**
 
 #### Option B: Manual Setup

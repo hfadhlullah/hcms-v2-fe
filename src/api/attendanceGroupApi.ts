@@ -28,7 +28,7 @@ export async function getAttendanceGroups(
   if (status) params.append('status', status);
   if (sort) params.append('sort', sort);
 
-  const response = await fetch(`/api/v1/attendance-groups?${params.toString()}`);
+  const response = await fetch(`${import.meta.env.VITE_API_TARGET}/api/v1/attendance-groups?${params.toString()}`);
   
   if (!response.ok) {
     console.warn(`Failed to fetch attendance groups: ${response.status} ${response.statusText}`);
@@ -53,7 +53,7 @@ export async function getAttendanceGroups(
  * Get a single attendance group by ID
  */
 export async function getAttendanceGroupById(id: number): Promise<AttendanceGroup> {
-  const response = await fetch(`/api/v1/attendance-groups/${id}`);
+  const response = await fetch(`${import.meta.env.VITE_API_TARGET}/api/v1/attendance-groups/${id}`);
   if (!response.ok) throw new Error(`Failed to fetch attendance group: ${response.statusText}`);
   return response.json();
 }
@@ -62,7 +62,7 @@ export async function getAttendanceGroupById(id: number): Promise<AttendanceGrou
  * Create a new attendance group
  */
 export async function createAttendanceGroup(request: CreateAttendanceGroupRequest): Promise<AttendanceGroup> {
-  const response = await fetch('/api/v1/attendance-groups', {
+  const response = await fetch(`${import.meta.env.VITE_API_TARGET}/api/v1/attendance-groups`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
@@ -78,7 +78,7 @@ export async function updateAttendanceGroup(
   id: number,
   request: UpdateAttendanceGroupRequest
 ): Promise<AttendanceGroup> {
-  const response = await fetch(`/api/v1/attendance-groups/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_TARGET}/api/v1/attendance-groups/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(request),
@@ -91,7 +91,7 @@ export async function updateAttendanceGroup(
  * Delete an attendance group
  */
 export async function deleteAttendanceGroup(id: number): Promise<{ message: string }> {
-  const response = await fetch(`/api/v1/attendance-groups/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_TARGET}/api/v1/attendance-groups/${id}`, {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error(`Failed to delete attendance group: ${response.statusText}`);

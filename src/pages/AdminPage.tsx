@@ -104,12 +104,12 @@ export function AdminPage() {
                         <div className="p-6 overflow-y-auto h-full">
                             <div className="flex gap-6">
                                 {/* Left Content Area */}
-                                <div className="flex-1 max-w-4xl">
+                                <div className="flex-1 min-w-0">
                                     {renderContent()}
                                 </div>
 
                                 {/* Right Sidebar - Apps */}
-                                <div className="w-80 flex-shrink-0">
+                                <div className="w-1/4 flex-shrink-0">
                                     <AppsSection />
                                 </div>
                             </div>
