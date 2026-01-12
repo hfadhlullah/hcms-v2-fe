@@ -1,6 +1,6 @@
 import React from "react";
 import { useLayoutStore } from "@/store";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -100,14 +100,6 @@ export const Sidebar = ({
           )}
         </div>
       </motion.aside>
-
-      {/* Mobile Drawer Toggle Button */}
-      <button
-        onClick={toggleSidebar}
-        className="md:hidden fixed bottom-6 right-6 z-40 p-3 bg-primary rounded-full text-white shadow-lg hover:shadow-xl transition-shadow"
-      >
-        {isSidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-      </button>
     </>
   );
 };

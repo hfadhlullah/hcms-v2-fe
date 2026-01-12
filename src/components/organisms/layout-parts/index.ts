@@ -8,3 +8,4 @@ export * from './AdminHeader';
 export * from './AdminSidebar';
 export * from './AttendanceAdminHeader';
 export * from './AttendanceAdminSidebar';
+export * from './BottomNav';
